@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 class DishDetail extends Component {
 
   formatDate(string){
-    var options = { month: 'short', day: 'numeric', year: 'numeric' };
+    var options = { month: 'short', day: '2-digit', year: 'numeric' };
     return new Date(string).toLocaleDateString([],options);
   }
 
