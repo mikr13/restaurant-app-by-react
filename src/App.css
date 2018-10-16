@@ -31,3 +31,7 @@ address{
 .navbar-dark {
     background-color: rgba(122, 67, 29, 1);
 }
+
+Button {
+    background-color: rgba(161, 130, 56, 1);
+}
