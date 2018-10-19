@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
     constructor(props) {
         super(props);
-    
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -15,26 +14,25 @@ class Header extends Component {
           isNavOpen: false,
           isModalOpen: false
         };
-      }
+    }
 
-      toggleNav() {
+    toggleNav = () => {
         this.setState({
-          isNavOpen: !this.state.isNavOpen
+            isNavOpen: !this.state.isNavOpen
         });
-      }
+    }
 
-      toggleModal() {
+    toggleModal = () => {
         this.setState({
-          isModalOpen: !this.state.isModalOpen
+            isModalOpen: !this.state.isModalOpen
         });
-      }
+    }
 
-      handleLogin(event) {
+    handleLogin = (event) => {
         this.toggleModal();
         alert("Username: " + this.username.value + " Password: " + this.password.value
             + " Remember: " + this.remember.checked);
         event.preventDefault();
-
     }
 
     render() {
@@ -43,7 +41,7 @@ class Header extends Component {
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
+                        <NavbarBrand className="mr-auto" href="/"><img src='./assets/images/logo.png' height="30" width="41" alt={this.props.title} /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
@@ -71,7 +69,7 @@ class Header extends Component {
                     <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
+                                <h1>{this.props.title}</h1>
                                 <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
                             </div>
                         </div>
