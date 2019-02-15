@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "*",
     "bootstrap-social": "^5.1.1",
+    "cross-fetch": "^3.0.1",
     "font-awesome": "^4.7.0",
     "react": "*",
     "react-dom": "*",
@@ -21,6 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "json-server": "cd json-server && json-server --watch db.json --static public -d 2000 -p 20277",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

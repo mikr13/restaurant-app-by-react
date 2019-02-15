@@ -2,7 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function RenderLeader({leader}) {
+const RenderLeader = ({leader}) => {
     return (
         <Media tag="li" className="m-3 p-1">
             <Media left middle>
@@ -17,7 +17,7 @@ function RenderLeader({leader}) {
     );
 }
 
-function About(props) {
+const About = (props) => {
 
     const leaders = props.leaders.map((leader) => {
         return (

@@ -5,16 +5,18 @@ import { Link } from 'react-router-dom';
 
 import { Loading } from './LoadingComponent';
 
-function FormatDate({cdate}) {
+import { baseUrl } from '../shared/baseUrl';
+
+const FormatDate = ({cdate}) => {
   var options = { month: 'short', day: '2-digit', year: 'numeric' };
   return new Date(cdate).toLocaleDateString([],options);
 }
 
-function RenderDish({dish}) {
+const RenderDish = ({dish}) => {
   if (dish != null)
     return (
       <Card>
-        <CardImg top src={dish.image} alt={dish.name} />
+        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
         <CardBody>
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
@@ -27,7 +29,7 @@ function RenderDish({dish}) {
     );
 }
 
-function RenderComments({comments, addComment, dishId}) {
+const RenderComments = ({comments, addComment, dishId}) => {
   if ( comments !=null )
     return(
         <div>

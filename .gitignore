@@ -22,3 +22,4 @@ yarn-error.log*
 
 # self-defined
 public/assets
+json-server
