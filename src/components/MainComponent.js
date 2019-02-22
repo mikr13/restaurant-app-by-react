@@ -11,10 +11,10 @@ import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
 import About from './AboutComponent';
 
-import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/actionCreators';
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/actionCreators';
 
 const mapDispatchToProps = dispatch => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => { dispatch(fetchDishes())},
   resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
   fetchComments: () => dispatch(fetchComments()),
@@ -68,6 +68,7 @@ class Main extends Component {
           isLoading={this.props.dishes.isLoading}
           errMess={this.props.dishes.err}
           comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+          postComment={this.props.postComment}
           commentsErrMess={this.props.comments.err}
           addComment={this.props.addComment}
         />
