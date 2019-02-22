@@ -16,93 +16,16 @@ class Contact extends Component {
 
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     firstname: '',
-        //     lastname: '',
-        //     telnum: '',
-        //     email: '',
-        //     agree: false,
-        //     contactType: '',
-        //     message: '',
-        //     touched: {
-        //         firstname: false,
-        //         lastname: false,
-        //         telnum: false,
-        //         email: false,
-        //         message: false
-        //     }
-        // };
-
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleBlur = this.handleBlur.bind(this);
-
         this.handleSubmit = this.handleSubmit.bind(this);
-        
     }
-
-    // validate(firstname, lastname, telnum, email, message) {
-
-    //     const errors = {
-    //         firstname: '',
-    //         lastname: '',
-    //         telnum: '',
-    //         email: '',
-    //         message: ''
-    //     };
-
-    //     if (this.state.touched.firstname && firstname.length < 3)
-    //         errors.firstname = 'First Name should be >= 3 characters';
-    //     else if (this.state.touched.firstname && firstname.length > 10)
-    //         errors.firstname = 'First Name should be <= 10 characters';
-
-    //     if (this.state.touched.lastname && lastname.length < 3)
-    //         errors.lastname = 'Last Name should be >= 3 characters';
-    //     else if (this.state.touched.lastname && lastname.length > 10)
-    //         errors.lastname = 'Last Name should be <= 10 characters';
-
-    //     // eslint-disable-next-line
-    //     const reg = new RegExp("/^\d+$/");
-    //     if (this.state.touched.telnum && !reg.test(telnum))
-    //         errors.telnum = 'Tel. Number should contain only numbers';
-
-    //     // eslint-disable-next-line
-    //     const emreg = new RegExp("\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z");
-    //     if (this.state.touched.email && email.split('').filter(x => x === '@').length !== 1 && !emreg.test(email)) 
-    //         errors.email = 'Email should contain a @ and it should be a valid format email';
-
-    //     if (this.state.touched.message && message.length < 20 && this.state.message !==null)
-    //         errors.message = 'Message should be >= 20 characters';
-
-    //     return errors;
-    // }
-
-    // handleInputChange(event) {
-    //     const target = event.target;
-    //     const value = target.type === 'checkbox' ? target.checked : target.value;
-    //     const name = target.name;
-    
-    //     this.setState({
-    //       [name]: value
-    //     });
-    // }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        // alert(JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contacttype, values.message);
         this.props.resetFeedbackForm();
-        // event.preventDefault();
     }
 
-    // handleBlur = (field) => (evt) => {
-    //     this.setState({
-    //         touched: {...this.state.touched, [field]: true}
-    //     });
-    // }
-
     render() {
-
-        // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email, this.state.message);
 
         return(
             <div className="container">
@@ -160,11 +83,6 @@ class Contact extends Component {
                                         validators={{
                                             required, minLength: minLength(3), maxLength: maxLength(15)
                                         }}/>
-                                        {/* value={this.state.firstname}
-                                            valid={errors.firstname === ''}
-                                            invalid={errors.firstname !== ''}
-                                            onBlur={this.handleBlur('firstname')}
-                                            onChange={this.handleInputChange}   */}
                                         <Errors
                                             className="text-danger"
                                             model=".firstname"
@@ -174,7 +92,6 @@ class Contact extends Component {
                                                 minLength: 'Must be greater than 2 characters ',
                                                 maxLength: 'Must be 15 characters or less '
                                             }}/>
-                                    {/* <FormFeedback>{errors.firstname}</FormFeedback> */}
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -195,7 +112,6 @@ class Contact extends Component {
                                             minLength: 'Must be greater than 2 characters ',
                                             maxLength: 'Must be 15 characters or less '
                                         }}/>
-                                    {/* <FormFeedback>{errors.lastname}</FormFeedback> */}
                                 </Col>                        
                             </Row>
                             <Row className="form-group">
@@ -217,7 +133,6 @@ class Contact extends Component {
                                             maxLength: 'Must be 13 characters or less with country code ',
                                             isNumber: 'Must be numbers '
                                         }}/>
-                                    {/* <FormFeedback>{errors.telnum}</FormFeedback> */}
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -237,7 +152,6 @@ class Contact extends Component {
                                             required: 'Required ',
                                             validEmail: 'Must be a valid email id '
                                         }}/>
-                                    {/* <FormFeedback>{errors.email}</FormFeedback> */}
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -252,7 +166,7 @@ class Contact extends Component {
                                     </div>
                                 </Col>
                                 <Col md={{size: 3, offset: 1}}>
-                                    <Control.select model=".contactType" name="contactType"
+                                    <Control.select model=".contacttype" name="contacttype"
                                             className="form-control" defaultValue="" required>
                                         <option value="" disabled hidden>Choose here...</option>
                                         <option value="tel">Tel.</option>
@@ -278,7 +192,6 @@ class Contact extends Component {
                                             minLength: 'Must be greater than 20 characters ',
                                             maxLength: 'Must be maximum 1000 characters '
                                         }}/>
-                                    {/* <FormFeedback>{errors.message}</FormFeedback> */}
                                 </Col>
                             </Row>
                             <Row className="form-group">

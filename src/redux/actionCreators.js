@@ -182,3 +182,41 @@ export const addLeader = (leader) => ({
     type: ActionTypes.ADD_LEADER,
     payload: leader
 });
+
+
+export const postFeedback = (firstname, lastname, telnum, email, agree, contacttype, message) => () => {
+
+    const newFeedback = { // using es6 autoassignment here, we don't need to specify a:a now, we can simply write a in place
+        firstname,
+        lastname,
+        telnum,
+        email,
+        agree,
+        contacttype,
+        message
+    };
+    
+    return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then(response => { alert(JSON.stringify(response)); })
+        .catch(error =>  { console.log('post feedback', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
+};
