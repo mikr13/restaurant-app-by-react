@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
+import { FadeTransform } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
 
@@ -23,20 +24,24 @@ const RenderCard = ({item, isLoading, err}) => {
         );
     } else 
         return(
-            <Card>
-                <CardImg src={baseUrl + item.image} alt={item.name} />
-                <CardBody>
-                <CardTitle>{item.name}</CardTitle>
-                {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
-                <CardText>{item.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform in transformProps={{
+                exitTransform: 'scale(0.5) translateY(-25%)'
+            }}>
+                <Card>
+                    <CardImg src={baseUrl + item.image} alt={item.name} />
+                    <CardBody>
+                    <CardTitle>{item.name}</CardTitle>
+                    {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                    <CardText>{item.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         );
 
 }
 
 const Home = (props) => {
-    if (props.dishesLoading || props.promoLoading) {
+    if (props.dishesLoading || props.promoLoading || props.leaderLoading) {
         return(
             <div className="container">
                 <div className="row">            
@@ -44,16 +49,17 @@ const Home = (props) => {
                 </div>
             </div>
         );
-    } else if (props.dishErrMess || props.promoErrMess) {
+    } else if (props.dishErrMess || props.promoErrMess || props.leaderErrMess) {
         return(
             <div className="container">
                 <div className="row">
                     <h4>{props.dishErrMess}</h4>
                     <h4>{props.promoErrMess}</h4>
+                    <h4>{props.leaderErrMess}</h4>
                 </div>
             </div>
         );
-    } else if(props.dish != null || props.promotion != null)
+    } else if(props.dish != null || props.promotion != null || props.leader != null)
         return(
             <div className="container">
                 <div className="row align-items-start">
@@ -64,7 +70,7 @@ const Home = (props) => {
                         <RenderCard item={props.promotion} isLoading={props.promoLoading} err={props.promoErrMess} />
                     </div>
                     <div className="col-12 col-md m-1">
-                        <RenderCard item={props.leader} />
+                        <RenderCard item={props.leader} isLoading={props.leaderLoading} err={props.leaderErrMess} />
                     </div>
                 </div>
             </div>

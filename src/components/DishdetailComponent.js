@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Label, Col, Row, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { LocalForm, Errors, Control } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 import { Loading } from './LoadingComponent';
 
@@ -15,13 +16,17 @@ const FormatDate = ({cdate}) => {
 const RenderDish = ({dish}) => {
   if (dish != null)
     return (
-      <Card>
-        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
+        <FadeTransform in transformProps={{
+            exitTransform: 'scale(0.5) translateY(-25%)'
+        }}>
+            <Card>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+      </FadeTransform>
     );
   else
     return (
@@ -34,13 +39,17 @@ const RenderComments = ({comments, postComment, dishId}) => {
     return(
         <div>
             <ul className="list-unstyled">
-                { comments.map((comment) => (
-                <li key={comment.id}>
-                    <p>{comment.comment}</p>
-                    <p>-- {comment.author}, <FormatDate cdate = {comment.date} /></p>
-                </li>
+            <Stagger in>
+                { comments.map((comment) => ( // direct return es6
+                    <Fade in>
+                        <li key={comment.id}>
+                            <p>{comment.comment}</p>
+                            <p>-- {comment.author}, <FormatDate cdate = {comment.date} /></p>
+                        </li>
+                    </Fade>
                 ))
                 }
+            </Stagger>
             </ul>
             <CommentForm dishId={dishId} postComment = {postComment} />
         </div>
